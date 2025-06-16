@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  postgres:
+    image: "postgres"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: forge_api
+      POSTGRES_USER: forge_api
+      POSTGRES_DB: forge_api
+    ports:
+      - 5432:5432
+  postgres_test:
+    image: "postgres"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: forge_api_test
+      POSTGRES_USER: forge_api_test
+      POSTGRES_DB: forge_api_test
+    ports:
+      - 5433:5432

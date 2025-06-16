@@ -1,0 +1,3 @@
+[alias]
+db = ["run", "--package", "forge-api-cli", "--bin", "db", "--"]
+generate = ["run", "--package", "forge-api-cli", "--bin", "generate", "--"]
