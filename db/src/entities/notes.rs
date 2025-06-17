@@ -15,8 +15,8 @@ pub struct Note {
 #[derive(Deserialize, Validate, Clone)]
 #[cfg_attr(feature = "test-helpers", derive(Serialize, Dummy))]
 pub struct NoteChangeset {
-    //#[cfg_attr(feature = "test-helpers", dummy(faker = "…()"))]
-    //#[validate(…))]
+    #[cfg_attr(feature = "test-helpers", dummy(faker = "Sentence(3..8)"))]
+    #[validate(length(min = 1))]
     pub text: String,
 }
 
@@ -33,14 +33,10 @@ pub async fn load(
     id: Uuid,
     executor: impl sqlx::Executor<'_, Database = Postgres>,
 ) -> Result<Note, crate::Error> {
-    match sqlx::query_as!(
-        Note,
-        "SELECT id, text FROM notes WHERE id = $1",
-        id
-    )
-    .fetch_optional(executor)
-    .await
-    .map_err(crate::Error::DbError)?
+    match sqlx::query_as!(Note, "SELECT id, text FROM notes WHERE id = $1", id)
+        .fetch_optional(executor)
+        .await
+        .map_err(crate::Error::DbError)?
     {
         Some(note) => Ok(note),
         None => Err(crate::Error::NoRecordFound),

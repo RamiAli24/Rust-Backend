@@ -1,3 +1,2 @@
-/// All endpoints for managing tasks
-pub mod tasks;
+/// All endpoints for managing notes
 pub mod notes;
