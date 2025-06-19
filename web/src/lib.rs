@@ -19,6 +19,8 @@ pub mod routes;
 /// Contains the application state definition and functionality to initialize it.
 pub mod state;
 
+/// Contains the login and sign up flow
+pub mod auth;
 /// Runs the application.
 ///
 /// This function does all the work to initiatilize and run the application:

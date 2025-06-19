@@ -1,0 +1,10 @@
+[package]
+name = "jwt-lib"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+chrono = "0.4.34"
+jsonwebtoken = "9.2.0"
+serde = { version = "1.0.197", features = ["derive"] }
+forge-api-db = { path = "../db" }

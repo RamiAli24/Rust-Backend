@@ -3,15 +3,14 @@ use axum::{
     http::{self, Method},
 };
 use fake::{Fake, Faker};
+use forge_api_db::entities;
 use forge_api_db::test_helpers::users::{create as create_user, UserChangeset};
-use forge_api_db::{entities, transaction, Error};
 use forge_api_macros::db_test;
 use forge_api_web::test_helpers::{BodyExt, DbTestContext, RouterExt};
 use googletest::prelude::*;
 use hyper::StatusCode;
 
 use serde_json::json;
-use std::collections::HashMap;
 use uuid::Uuid;
 
 #[db_test]
