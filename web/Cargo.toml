@@ -35,6 +35,10 @@ validator = "0.20"
 forge-api-macros = { path = "../macros", optional = true }
 jwt-lib = { path = "../jwt-lib" }
 bcrypt = "0.17.0"
+utoipa = "5"
+utoipa-axum = "0.2"
+
+utoipa-swagger-ui = { version = "9", features = ["axum"] }
 
 [dev-dependencies]
 fake = "4.0"

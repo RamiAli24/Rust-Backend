@@ -6,7 +6,7 @@ use sqlx::Postgres;
 use uuid::Uuid;
 use validator::Validate;
 
-#[derive(Serialize, Debug, Deserialize)]
+#[derive(Serialize, Debug, utoipa::ToSchema, Deserialize)]
 pub struct Note {
     pub id: Uuid,
     pub text: String,

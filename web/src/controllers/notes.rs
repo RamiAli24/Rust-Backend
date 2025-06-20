@@ -1,9 +1,16 @@
 use crate::{error::Error, state::SharedAppState};
 use axum::{extract::Path, extract::State, http::StatusCode, Json};
 use forge_api_db::entities;
+use forge_api_db::entities::notes::Note;
 use tracing::info;
 use uuid::Uuid;
 
+#[utoipa::path(
+    post, 
+    path = "/notes",
+    request_body(content = Note, content_type = "application/json"),
+    responses((status = OK, body = Note))
+)]
 #[axum::debug_handler]
 pub async fn create(
     State(app_state): State<SharedAppState>,
@@ -15,6 +22,7 @@ pub async fn create(
     Ok((StatusCode::CREATED, Json(note)))
 }
 
+#[utoipa::path(get, path = "/notes", responses((status = OK, body = Note)))]
 #[axum::debug_handler]
 pub async fn read_all(
     State(app_state): State<SharedAppState>,
@@ -27,6 +35,7 @@ pub async fn read_all(
     Ok(Json(notes))
 }
 
+#[utoipa::path(get, path = "/notes/{id}", responses((status = OK, body = Note)))]
 #[axum::debug_handler]
 pub async fn read_one(
     State(app_state): State<SharedAppState>,
@@ -36,6 +45,7 @@ pub async fn read_one(
     Ok(Json(note))
 }
 
+#[utoipa::path(put, path = "/notes/{id}", responses((status = OK, body = Note)))]
 #[axum::debug_handler]
 pub async fn update(
     State(app_state): State<SharedAppState>,
@@ -46,6 +56,7 @@ pub async fn update(
     Ok(Json(note))
 }
 
+#[utoipa::path(delete, path = "/notes/{id}", responses((status = OK, body = Note)))]
 #[axum::debug_handler]
 pub async fn delete(
     State(app_state): State<SharedAppState>,

@@ -37,10 +37,10 @@ Gerust follows a full stack testing approach. The application's endpoint includi
 
 #[db_test]
 async fn test_read_all(context: &DbTestContext) {
-    let task_changeset: TaskChangeset = Faker.fake();
-    create_task(task_changeset.clone(), &context.db_pool)
-        .await
-        .unwrap();
+let task_changeset: TaskChangeset = Faker.fake();
+create_task(task_changeset.clone(), &context.db_pool)
+.await
+.unwrap();
 
     let response = context
         .app
@@ -57,7 +57,17 @@ async fn test_read_all(context: &DbTestContext) {
         tasks.first().unwrap().description,
         eq(task_changeset.description)
     );
+
 }
+
 ### Test helpers
 
 The forge-api-web crate includes test helpers in `src/test_helpers` that add a number of convience functions for easier issuing of requests and parsing of responses. Those helpers depend on the `test-helpers` feature flag which is automatically enabled when running tests but not for production builds. _You should not need to make any changes to these helpers._
+
+### Note for Utopia
+
+Set swagger download url when facing ssl issues while building the crate
+
+```bash
+export SWAGGER_UI_DOWNLOAD_URL=file:///forge-api/web/swagger-ui-5.25.2zip
+```

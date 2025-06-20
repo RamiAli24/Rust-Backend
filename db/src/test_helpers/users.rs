@@ -19,6 +19,8 @@ pub struct UserChangeset {
     /// The user's auth token, fake data will be a 100 characters long number
     #[dummy(faker = "100..101")]
     pub token: String,
+    #[dummy(faker = "100..101")]
+    pub pass: String,
 }
 
 /// Creates a user in the database with the data in the passed [`UserChangeset`].
@@ -36,5 +38,7 @@ pub async fn create(user: UserChangeset, db: &PgPool) -> Result<User, anyhow::Er
     Ok(User {
         id: record.id,
         name: user.name,
+        pass: user.pass,
+        token: user.token,
     })
 }
