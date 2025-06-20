@@ -10,6 +10,7 @@ doctest = false
 
 [features]
 test-helpers = ["dep:tower", "dep:hyper", "dep:forge-api-macros"]
+dhat-heap = []
 
 [dependencies]
 anyhow = "1.0"
@@ -37,8 +38,8 @@ jwt-lib = { path = "../jwt-lib" }
 bcrypt = "0.17.0"
 utoipa = "5"
 utoipa-axum = "0.2"
-
 utoipa-swagger-ui = { version = "9", features = ["axum"] }
+dhat = "0.3.3"
 
 [dev-dependencies]
 fake = "4.0"

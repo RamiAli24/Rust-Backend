@@ -40,9 +40,20 @@ pub async fn run() -> anyhow::Result<()> {
     let addr = config.server.addr();
     let listener = TcpListener::bind(&addr).await?;
     info!("Listening on {}", &addr);
-    serve(listener, app.into_make_service()).await?;
+
+    // make Ctrl+C cause a graceful shutdown to be able to generate dhat-heap.json
+
+    serve(listener, app.into_make_service())
+        .with_graceful_shutdown(shutdown_signal())
+        .await?;
 
     Ok(())
+}
+
+async fn shutdown_signal() {
+    tokio::signal::ctrl_c()
+        .await
+        .expect("failed to install Ctrl+C handler");
 }
 
 /// Initializes tracing.
